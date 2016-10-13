@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>The Wall</title>
+        <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='wall.css')}}">
+    </head>
+    <body>
+        <div id='header'>
+            <h1>CodingDojo Wall</h1>
+            <p>Welcome {{session['name']}} <a href='/logout'>log off</a></p>
+        </div>
+        <hr>
+        <div id='messagebox'>
+            <form action="/message" method="post">
+                <textarea name="message"></textarea>
+                <input type="submit" name="submit" value="Post a message">
+            </form>
+        </div>
+        {% for i in messages %}
+            <div class='chaintop'>
+                <p class='name'>{{i['first_name']}} {{i['last_name']}} - {{i['tstamp']}}</p>
+                <p>{{i['message']}}</p>
+                {% for j in comments%}
+                    {% if i['mid'] == j['mid'] %}
+                        <div class='chain'>
+                            <p class='name'>{{j['first_name']}} {{j['last_name']}} - {{j['tstamp']}}</p>
+                            <p>{{j['comment']}}</p>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+                <form action="/comment" method="post">
+                    <textarea name="comment"></textarea>
+                    <button type="submit" name="submit" value="{{i['mid']}}">Post a comment</button>
+                </form>
+            </div>
+        {% endfor %}
+
+    </body>
+</html>

@@ -1,0 +1,74 @@
+*{
+    font-family: tahoma;
+}
+
+#header p{
+    display: inline-block;
+    margin-left: 50%;
+    vertical-align: top;
+    margin-top: 45px;
+}
+
+#header h1{
+    display: inline-block;
+    vertical-align: top;
+}
+
+#header a{
+    display: inline-block;
+    margin-left: 10px;
+}
+
+#header a:visited{
+    color: blue;
+}
+
+.chaintop p.name{
+    font-weight: bold;
+    margin-left: 0px;
+}
+
+.chain{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: 30px;
+}
+
+
+.chaintop{
+    margin-left: 20px;
+    margin-bottom: 30px;
+    /*border-style: solid;*/
+    /*border-width: thin;*/
+}
+
+.chaintop p{
+    margin-left: 10px
+}
+
+.chaintop button{
+    background-color: green;
+    color: white;
+    margin-left: 115px;
+}
+
+form button{
+    display: block;
+}
+
+#messagebox input{
+    display: block;
+    background-color: blue;
+    color: white;
+    margin-left: 115px;
+}
+
+#messagebox{
+    margin-bottom: 20px;
+}
+
+textarea{
+    width: 200px;
+    border: 1px solid;
+    padding: 5px;
+}
