@@ -1,11 +1,10 @@
 from flask import Flask, request, redirect, render_template, session, flash
-# import the Connector function
 from mysqlconnection import MySQLConnector
 from flask.ext.bcrypt import Bcrypt
 import re
 app = Flask(__name__)
 app.secret_key= 'secret'
-# connect and store the connection in "mysql" note that you pass the database name to the function
+
 bcrypt = Bcrypt(app)
 mysql = MySQLConnector(app, 'wall')
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
@@ -64,13 +63,17 @@ def login():
     password = request.form['pass']
     query = "SELECT * FROM users WHERE email = :email LIMIT 1"
     data = {'email':email}
-    user = mysql.query_db(query, data)[0]
+    user = mysql.query_db(query, data)
+    if len(user) == 0:
+        flash('Invalid Email')
+        return redirect('/')
+    user = user[0]
     if bcrypt.check_password_hash(user['pass_hash'], password):
         session['id'] = user['id']
         session['name'] = user['first_name'] + ' ' + user['last_name']
         return redirect('/wall')
     else:
-        flash('Invalid login credentials')
+        flash('Invalid Password')
         return redirect('/')
 
 @app.route('/wall', methods=['get', 'post'])
